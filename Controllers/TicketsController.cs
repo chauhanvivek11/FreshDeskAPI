@@ -20,7 +20,9 @@ namespace FreshDeskAPI.Controllers
 
 
         //GET : /tickets (database se sare tickets lao )
-        public IActionResult Get()
+
+        [HttpGet]
+        public IActionResult GetAllTickets()
         {
             //List ki jagah _context.Tickets use kregei 
             var allTickets = _context.Tickets.ToList();
