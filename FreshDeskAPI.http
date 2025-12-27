@@ -1,0 +1,6 @@
+@FreshDeskAPI_HostAddress = http://localhost:5192
+
+GET {{FreshDeskAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
