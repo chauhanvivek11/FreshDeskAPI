@@ -4,6 +4,21 @@ using FreshDeskAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+// 👇👇👇 YEH CODE ADD KARO (DB Context ke neeche kahin bhi) 👇👇👇
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+}); 
+
+
+
+
 // 👇 2. YEH LINE ADD KARNI HAI (Database Service)
 // 👇 2. YEH WALI LINE ADD KARO (Sir ne yehi likhwaya hoga)
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -36,13 +51,14 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 //}
-
-//---New Code : Bridge ko ON karo ----
-app.UseCors("AllowAngular");
-
-
-
 app.UseHttpsRedirection();
+//---New Code : Bridge ko ON karo ----
+app.UseCors("AllowAll");
+
+app.UseAuthorization();
+
+
+
 
 // Step 2: Controllers ka raasta kholo
 app.MapControllers();
